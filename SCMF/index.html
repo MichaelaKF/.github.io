@@ -1,0 +1,213 @@
+<html>
+	<head>
+		<link type="text/css"rel="stylesheet" href="stylesheet.css">
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<title> Comment Post </title>
+	
+	<script>
+		function validate(){
+			//Name Validation
+			var name=document.getElementById("name");
+			var blank_field= false;
+			if(name.value==""){
+				name.style.backgroundColor = "pink";
+				blank_field = true;
+			}else {
+				name.style.backgroundColor = "lightgreen";
+			}
+
+			//title validate
+			var title= document.getElementById("title");
+			if(title.value == ""){
+				title.style.backgroundColor = "pink";
+				blank_field = true;
+			} else {
+				title.style.backgroundColor = "lightgreen";
+			}
+
+			//comment validate
+			var comment= document.getElementById("comment");
+			if(comment.value == ""){
+				comment.style.backgroundColor = "pink";
+				blank_field = true;
+			} else {
+				comment.style.backgroundColor = "lightgreen";
+			}
+
+			//drop down validate
+			var select_color = document.getElementById("select_color");
+			var select_bgcolor = document.getElementById("select_bgcolor");
+
+			if(select_color.value == "Choose A Color") {
+				select_color.style.border = "2px solid red";
+				blank_field = true;
+			} else if (select_bgcolor.value == "Choose A Color") {
+				select_bgcolor.style.border = "2px solid red";
+				blank_field = true;
+			} else {
+				select_color.style.border = "none";
+				select_bgcolor.style.border = "none";
+			}
+
+			//Radio Button Validation
+			var icon = document.getElementsByName("icon");
+			var radiobtns = document.getElementById("radiobtns");
+			var blank_radio = true;
+			for(var i=0; i < icon.length; i++){
+				if(icon[i].checked == true){
+					blank_radio = false;
+				}	
+			}
+
+			if(blank_radio == true){
+				radiobtns.style.border= "2px solid red";
+				blank_field = true;
+			} else {
+				radiobtns.style.border = "none";
+			}
+
+			//Error Message
+			var message = document.getElementById("message");
+			if(blank_field == true){
+				message.innerHTML = "<h3 style='color:red;'>You missed a spot!</h3>";
+			} else {
+				message.innerHTML = "";
+			}
+			add();
+		}//end function validate
+
+		var array = [];
+
+		function add(){
+			/* Variables */
+			var name = document.getElementById("name"); 
+			var title = document.getElementById("title"); 
+			var comment = document.getElementById("comment");
+
+			var icon = document.getElementsByName("icon"); 
+			var icon_value;
+
+			for(var i=0; i < icon.length; i++){
+				if(icon[i].checked == true){
+					icon_value = icon[i].value; 
+				}
+			}
+
+			var select_color = document.getElementById("select_color"); 
+			var select_bgcolor = document.getElementById("select_bgcolor");
+			/* all variable and loops go above this */
+		
+			var storage = {name: name.value, title: title.value, comment: comment.value,icon: icon_value,select_color: select_color.value, select_bgcolor: select_bgcolor.value};
+
+			/* the push comes after the object above */
+			/* Object and push */
+			array.push(storage);
+			show();
+		} //end function add
+
+		function show(){
+			var display = document.getElementById("display");
+			var post ="";
+			for(var i = 0; i < array.length; i ++){
+				post += "<div id='usercomment' style='background-color:"+array[i].select_bgcolor+";'>"; 
+				post += "<input type='checkbox' onclick='gone("+i+");'/>";
+				post += "<span style='color:"+array[i].select_color+";'>"; 
+				post += "<img src='"+array[i].icon+"' class='icon' />"; 
+				post += "<strong> "+array[i].name+ "</strong><br>";
+				post += "<strong> "+array[i].title+ "</strong><br>";
+				post += "<strong> "+array[i].comment+ "</strong><br>";
+				post += "</span>";
+				post += "</div>";
+			}
+			display.innerHTML = post;
+		} //end function show
+
+		function gone(index){
+			array.splice(index,1);
+			show();
+		}
+	</script>
+	</head>
+	<body id="body">
+		<div class="container">
+			
+			<div class="row">
+				<div class="col-xs-12 col-sm-4" id="logo">
+					<img class="img-responsive" src="http://aminoapps.com/static/bower/emojify.js/images/emoji/joy.png">
+			</div><!--end logo row-->
+
+			<div class="row">
+				<div class="col-xs-12" id="menu">
+					<ul class="nav nav-tabs">
+						<li> <a href="#"> HOME</a> </li>
+						<li> <a href="#"> VIDEOS</a> </li>
+						<li> <a href="#"> SHOP</a> </li>
+					</ul>
+				</div>
+			</div><!--end menu row-->
+
+			<div class="row">
+				<div class="col-xs-12 col-sm-8" id="comments">COMMENTS
+					<div class="col-xs-12 col-sm-4" id="form">
+						<header id="header"> Leave a Comment</header>
+						<div id="message"></div>
+						<form class="form-inline">
+							
+							<label> Name: </label>
+						<input type="text" class="form-control" id="name" placeholder="Enter Name">
+						
+						<div>
+							<label> Color: </label>
+							<select class="form-control" id="select_color"> 
+								<option>Choose A Color</option>
+								<option> Blue</option>
+								<option> Green</option>
+								<option> Black</option>
+								<option> White </option>
+							</select>
+						</div>
+					</form>
+
+					<form class="form-horizontal">
+						<label class"control-label"> Title: </label>
+						<input type="text" class="form-control" id="title" placeholder="Enter Comment Title">
+						<label> Background Color:</label>
+						<select class"form-control" id="select_bgcolor">
+							<option>Choose A Color</option>
+							<option> Black </option>
+							<option> White </option>
+							<option> Blue</option>
+							<option> Green </option>
+						 </select>
+					</form>
+
+					<form class="form-inline" id="radiobtns">
+						<label class="control-label"> Icons: </label>
+						<input type="radio" name="icon" value="book3 (1).png">
+						<img src="book3 (1).png" class="icon"/>
+
+						<input type="radio" name="icon" value="music_eighth_note.png">
+						<img src="music_eighth_note.png" class="icon"/>
+
+						<input type="radio" name="icon" value="emoji6.png">
+						<img src="emoji6.png" class="icon"/>
+
+						<input type="radio" name="icon" value="pencil.png">
+						<img src="pencil.png" class="icon"/>
+					
+					</form>
+					<label>Comment: </label> <br>
+					<textarea id="comment" class="formcontrol" rows="8"> </textarea> 
+					<div>
+					<input class="btn btn-default" id="submit-button" type="button" value="Submit Comment" onclick="validate()">
+				</div>
+				</div><!--end form id div-->
+				<div id="display"></div>
+			</div><!--end comments id div-->
+
+
+		</div><!--end container div-->
+	</body>
+</html>

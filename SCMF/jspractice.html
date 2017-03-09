@@ -1,0 +1,135 @@
+<html>
+	<head>
+		<title> JavaScript Practice </title>
+		<script type="text/javascript">
+			function start(){
+				var age = 15;
+				var name = "Michaela Fluck";
+				alert(name+ " is " + age);
+			}
+			
+			function math(){
+				var math = 133 * 5324 - 535 / 2 + 123;
+				alert(math);
+			}
+
+			function question(){
+				var question = prompt("What is my favorite color?");
+				if(question == "teal") {
+					alert("You know me very well, you are a friend.");
+				} else {
+					alert("Talk to me more, you don't know my favorite color.");
+				}
+			}//end funtion
+
+			function rate(){
+				var q = prompt("How much to you like JavaScript 1 - 10?");
+				if(q < 4) {
+					alert("I'll try and make things more exciting!");
+				} else if (q < 7) {
+					alert("Just wait it gets better!");
+				} else {
+					alert("You're going to love the stuff coming up!");
+				}
+			}//end function
+
+			function change(){
+				var edit = document.getElementById("find");
+				edit.innerHTML = "This Page is Full of Magic!";
+			}
+
+			
+			var pass = 1;
+			function toggle(){
+			var twitch = document.getElementById("rotate");
+			if(pass == 1){
+			twitch.innerHTML = "You didn't see anything...";
+			pass=2;
+			}else if (pass == 2){
+			twitch.innerHTML = "<img src='https://simplycodingcourses.com/files/sclogo.png' />";
+			pass = 3;
+			} else {
+			twitch.innerHTML = "This text may change, even into an picture";
+			pass = 1;
+			}
+			}//end function
+
+			function count(){
+				var count = 1; 
+				while(count < 10) { 
+					alert(count); 
+					count = count + 2; 
+				}
+			}
+
+			function numbers(){
+				for(var i=0; i<12; i+=2) { 
+					alert(i); 
+				}
+			}
+
+			var games= ["Apples to apples", "Mafia", "Basketball", "Dodgeball"];
+
+			var sentence= "How much would would a woodchuck chuck if a woodchuck could chuck wood";
+			var array = [];
+			for (var i = 0; i < sentence.length; i++){
+				if(sentence[i] == "w") {
+				array.push(sentence[i]);
+				}
+			}
+
+			var shirt = {color:"black & blue", price: 15.50, size: "L", shipping: 4.50};
+			function obj(){
+				var ask = prompt("What do you want to know about my shirt? (color, price, size or shipping):");
+				alert("This shirt's " + ask + " is " + shirt[ask]);
+			}
+			
+			function morph(){
+				var box = document.getElementById("box");
+				box.style.backgroundColor = "black";
+				box.style.border = "12px ridge yellow";
+				box.innerHTML = "Did you just see that!";
+			}
+		</script>
+		<style>
+		#box{
+			color: orange;
+			background-color: green;
+			height: 250px;
+			width: 250px;
+		}
+	</style>
+
+	</head>
+	<body>
+		There are <script>document.writeln(array.length);</script> w's in the sentence: "<script>document.writeln(sentence);</script>"
+
+		A game I like is<span> <script>document.writeln(games[0]) </script> </span>
+
+		<div id="rotate">This text may change, even into an picture</div>
+
+		<div id="find">My JavaScript Practice Page</div>
+
+		<input type="button" onclick="start()" value="Press Me">
+
+		<input type="button" onclick="math()" value="Math Time">
+
+		<input type="button" onclick="question()" value="Favorite Color">
+
+		<input type="button" onclick="rate()" value="JavaScript Rating">
+
+		<input type="button" onclick="change()" value="Magic Button">
+
+		<input type="button" onclick="toggle()" value="Change Button">
+
+		<input type="button" onclick="count()" value="While Loop">
+
+		<input type="button" onclick="numbers()" value="For Loop">
+
+		<input type="button" onclick="obj()" value="Shirt Info">
+
+		<div id="box">You're about to see some change</div>
+
+		<input type="button" onclick="morph()" value="Change the box">
+	</body>
+</html>
